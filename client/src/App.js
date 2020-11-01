@@ -5,17 +5,17 @@ function App() {
   const [data, setData] = useState(""); 
   const [data2, setData2] = useState(""); 
   const [form, setForm] = useState(""); 
-console.log(data2)
+
   const handleChange = (e) => {
     setForm(e.target.value)
   }
 
   const handleSubmit = () => {
-    axios.post("/hello", {message: form}).then((res)=>setData2(res.data.message));
+    axios.post("https://v-201189-simple-chat.herokuapp.com/hello", {message: form}).then((res)=>setData2(res.data.db));
   }
 
   useEffect(()=> {
-    fetch("/hello").then((res)=>res.json()).then((json)=>setData(json));
+    fetch("https://v-201189-simple-chat.herokuapp.com/hello").then((res)=>res.json()).then((json)=>setData(json));
     
   }, [])
 
@@ -30,7 +30,7 @@ console.log(data2)
       />
       <button onClick = {handleSubmit}>Send</button>
       <p>post request:</p>
-      {!!data2 ? data2 : ""}
+      {!!data2 && data2.map((item)=><p>{item}</p>)}
     </div>
   );
 }
